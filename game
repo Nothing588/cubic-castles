@@ -1,0 +1,507 @@
+
+
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50797178-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-50797178-2', {
+          cookie_flags: 'secure;samesite=none'
+      });      
+      gtag('config', 'G-XKRJ7W07DJ', {
+          cookie_flags: 'secure;samesite=none'
+      });      
+      
+
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="Description" content="Castles.cc ~ Explore, mine, craft, and trade with people from all over the world!">
+    <meta name="Keywords" content="Sandbox, Build, Craft, Mine, Trade, Economy, 3D, IO, Cubic Castles, Castles, Adventure, MMO,3rd person, Third person, Trade">
+      <title>Castles.cc - Build, trade, farm, mine, and craft!</title>
+    <style>
+      body {
+        font-family: arial;
+        margin: 0;
+        background-color: #fff4dc;
+        color: grey;
+        padding: none;
+      overflow-y: scroll;      }
+      a {
+        color: #999999;
+      }
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+
+      div.emscripten { text-align: center; }      
+      div.emscripten2 { text-align: center;   position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%); }      
+      div.emscripten_border { border: 1px solid black; }
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      canvas.emscripten { border: 0px none; background-color: black; 
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin: 0px;
+        border: 0;
+        width: 100%;
+        height: 100%;
+        display: block;   
+       }
+
+      #emscripten_logo {
+        display: inline-block;
+        margin: 0;
+      }
+
+
+      @-webkit-keyframes rotation {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+      }
+      @-moz-keyframes rotation {
+        from {-moz-transform: rotate(0deg);}
+        to {-moz-transform: rotate(360deg);}
+      }
+      @-o-keyframes rotation {
+        from {-o-transform: rotate(0deg);}
+        to {-o-transform: rotate(360deg);}
+      }
+      @keyframes rotation {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+
+      #status {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 30px;
+        margin-left: 20px;
+        font-weight: bold;
+        color: rgb(120, 120, 120);
+      }
+
+      #progress {
+        height: 20px;
+        width: 300px;
+      }
+
+      #controls {
+        display: inline-block;
+        float: right;
+        vertical-align: top;
+        margin-top: 30px;
+        margin-right: 20px;
+      }
+    </style>
+
+    <script>
+      window.aiptag = window.aiptag || {cmd: []};
+      aiptag.cmd.display = aiptag.cmd.display || [];
+      aiptag.cmd.player = aiptag.cmd.player || [];
+
+      //CMP tool settings
+      aiptag.cmp = {
+        show: true,
+        position: "centered",  //centered, bottom
+        button: true,
+        buttonText: "Privacy settings",
+        buttonPosition: "bottom-left" //bottom-left, bottom-right, top-left, top-right
+      }
+
+      aiptag.cmd.player.push(function() {
+        adplayer = new aipPlayer({
+          AD_WIDTH: 960,
+          AD_HEIGHT: 540,
+          AD_FULLSCREEN: false,
+          AD_CENTERPLAYER: false,
+          LOADING_TEXT: 'loading advertisement',
+          PREROLL_ELEM: function(){return document.getElementById('preroll')},
+          AIP_BLOCKED: function (evt)  {
+            /*******************
+            ***** WARNING *****
+            *******************
+            Please do not remove the PREROLL_ELEM
+            from the page, it will be hidden automaticly.
+            If you do want to remove it use the AIP_REMOVE callback.
+            */
+            //alert("Preroll Ad Completed: " + evt);
+            _DoneVideoAd();
+          },
+          AIP_COMPLETE: function (evt)  {
+            /*******************
+            ***** WARNING *****
+            *******************
+            Please do not remove the PREROLL_ELEM
+            from the page, it will be hidden automaticly.
+            If you do want to remove it use the AIP_REMOVE callback.
+            */
+            //alert("Preroll Ad Completed: " + evt);
+            _DoneVideoAd();
+          },
+          AIP_REMOVE: function ()  {
+            // Here it's save to remove the PREROLL_ELEM from the page if you want. But it's not recommend.
+          }
+        });
+      });
+
+      function show_preroll() {
+        //check if the adslib is loaded correctly or blocked by adblockers etc.
+        if (typeof adplayer !== 'undefined') {
+          aiptag.cmd.player.push(function() { adplayer.startPreRoll(); });
+        } else {
+          //Adlib didnt load this could be due to an adblocker, timeout etc.
+          //Please add your script here that starts the content, this usually is the same script as added in AIP_COMPLETE or AIP_REMOVE.
+          alert("Ad Could not be loaded, load your content here");
+        }
+      }
+      </script>
+
+        
+
+        <script>
+            var lastWidth = window.innerWidth;
+            var lastHeight = window.innerHeight;
+            function HideAd(theDivName) {
+              if(typeof gCrazySDK == 'undefined') {
+                aiptag.cmd.display.push(function() { aipDisplayTag.display(theDivName); });
+              }
+					    document.getElementById(theDivName).style.visibility = 'hidden';
+            }
+
+            function ShowBannerAd(theDivName, adPosX, adPosY, aXAlign, aYAlign)
+            {
+              window.scrollTo(0, 0);
+              document.documentElement.style.overflow = 'hidden';
+              let aDiv = document.getElementById(theDivName);
+              let aDivHeight = aDiv.offsetHeight;
+              let aDivWidth = aDiv.offsetWidth;
+              if(aYAlign == 'center')	adPosY -= aDivHeight/2; 
+              if(aYAlign == 'bottom') adPosY -= aDivHeight; 
+              if(aXAlign == 'center')	adPosX -= aDivWidth/2; 
+              else if(aXAlign == 'right')	adPosX -= aDivWidth; 
+
+              if(adPosY + aDivHeight < window.innerHeight-100 || !theDivName.includes('multi'))
+              {
+                aDiv.style.visibility = 'visible'; 
+                aDiv.style.top = ''+adPosY+'px'; 
+                aDiv.style.left = ''+adPosX+'px'; 
+                lastWidth = window.innerWidth;
+                lastHeight = window.innerHeight;
+                              }
+            }
+
+          function CopyToClip(theString) {
+            if(typeof gCrazySDK !== 'undefined' && theString.length > 32) {
+              var aCode = theString.substr(theString.length-32);
+              theString = gCrazySDK.inviteLink({ roomId: aCode });
+            }
+            //SDL_SetClipboardText(theString);
+            const el = document.createElement('textarea');
+            el.value = theString;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+          }
+
+
+
+
+
+
+            function move() 
+            {
+              var aDiv = document.getElementById('castles-cc_300x250');
+              aDiv.style.left = ''+Math.floor(window.innerWidth-320)+'px';
+              aDiv.style.top = ''+Math.floor(window.innerHeight - 270)+'px';
+              aDiv = document.getElementById('castles-cc_300x250_2');
+              aDiv.style.left = ''+20+'px';
+              aDiv.style.top = ''+Math.floor(window.innerHeight - 270)+'px';
+            }
+            window.onresize = move;
+        </script>
+
+                  <script async src="https://api.adinplay.com/libs/aiptag/pub/COG/castles.cc/tag.min.js"></script>
+        
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>
+          window.OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "5fc93807-3b17-444b-9b5e-5d53dd04ea47",
+            });
+          });
+        </script>
+      <script>
+        function IAmOnline(ax)
+        {
+          if(typeof OneSignal.isPushNotificationsEnabled === 'undefined')
+          {
+            return;
+          }
+          OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+            OneSignal.getUserId().then(function(userId) {
+						  //console.log('OneSignal User ID:'+userId);
+						  //console.log('CC User ID:'+ax);
+              http=new XMLHttpRequest();
+              var aURL ="https://cubiccastles.com/iamonline.php?v1="+userID+"&v2="+ax+"&push="+isEnabled;
+              console.log('url:'+aURL);
+              http.open("GET", aURL, true);
+
+						});              
+          });
+        }
+
+      </script>
+  </head>
+  <body>
+    
+    <div class="emscripten_border">
+      <canvas onclick="window.focus();" class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+    </div>
+
+    <div id="loading" class="emscripten2">
+      <img src="cc_logo.png"><br/>
+      <progress value="0" max="100" id="progress" hidden=1></progress><br/><br/>
+      Please wait while Castles.cc loads. &nbsp;<b>It's worth it!</b>
+    </div>
+
+
+    <script type='text/javascript'>
+      var progressElement = document.getElementById('progress');
+      var progressDiv = document.getElementById('loading');
+      var Module = {
+        preRun: [],
+        postRun: [],
+        print: (function() {
+          var element = document.getElementById('output');
+        })(),
+        printErr: function(text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          console.error(text);
+        },
+        canvas: (function() {
+          var canvas = document.getElementById('canvas');
+
+          // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+          // application robust, you may want to override this behavior before shipping!
+          // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+          canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+          return canvas;
+        })(),
+        setStatus: function(text) {
+          //console.log("status:"+text);
+          if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+          if (text === Module.setStatus.last.text) return;
+          var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+          var now = Date.now();
+          if (m && now - Module.setStatus.last.time < 30) return; // if this is a progress update, skip it if too soon
+          Module.setStatus.last.time = now;
+          Module.setStatus.last.text = text;
+          if (m) {
+            text = m[1];
+            progressElement.value = parseInt(m[2])*95;
+            progressElement.max = parseInt(m[4])*100;
+            progressElement.hidden = false;
+            progressDiv.hidden = false;
+          } else {
+//            progressElement.value = null;
+//            progressElement.max = null;
+//            progressElement.hidden = true;
+//            progressDiv.hidden = true;
+            console.log("hiding loading bar");
+
+          }
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          //Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+      window.onerror = function(event) {
+        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+        Module.setStatus('Exception thrown, see JavaScript console');
+        Module.setStatus = function(text) {
+          if (text) Module.printErr('[post-exception status] ' + text);
+        };
+      };
+
+      document.getElementById('canvas').addEventListener('click', resumeAudio);
+      //document.addEventListener('keydown', resumeAudio);
+
+
+      function resumeAudio(e) {
+        console.log("resuming audio1");
+	      if (typeof Module === 'undefined'
+	          || typeof Module.SDL2 == 'undefined'
+	          || typeof Module.SDL2.audioContext == 'undefined')
+	          return;
+	      if (Module.SDL2.audioContext.state == 'suspended') {
+    	      Module.SDL2.audioContext.resume();
+            console.log("resuming audio2");
+    	  }
+    	  if (Module.SDL2.audioContext.state == 'running') {
+	          document.getElementById('canvas').removeEventListener('click', resumeAudio);
+	          document.removeEventListener('keydown', resumeAudio);
+            console.log("resuming audio3");
+
+	      }
+      }
+
+
+    </script>
+    <script>
+      function requestFullScreen(element) {
+          // Supports most browsers and their versions.
+          var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+          if (requestMethod) { // Native full screen.
+              requestMethod.call(element);
+          } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+              var wscript = new ActiveXObject("WScript.Shell");
+              if (wscript !== null) {
+                  wscript.SendKeys("{F11}");
+              }
+          }
+      }
+
+      //function popup(mylink, windowname) { if (! window.focus)return true; var href; if (typeof(mylink) == 'string') href=mylink; else href=mylink.href; window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); return false; }
+
+   //   document.getElementById('canvas').addEventListener("keydown", event => {
+       // if (event.keyCode === 120) {
+          //requestFullScreen(document.getElementById('canvas'));
+          //return;
+        //}
+      //});
+    </script>
+ 
+
+            <div width="100%" id="GameExtras" style="top:100%; position:absolute; backgroundColor: #fff4dc;">
+            <div align=right width=100% style="padding:5px; background-color:#000000;"><img style="float:left" src="ccowlogo.png"><a alt="instagram" href="https://www.instagram.com/cubiccastles/" target="_blank"><img src="instagram.png"></a><a alt="facebook" href="https://www.facebook.com/cubiccastles/" target="_blank"><img src="facebook.png"></a><a alt="twitter" href="https://twitter.com/cosmiccowgames" target="_blank"><img src="twitter.png"></a></div><center><br><div width=80%><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;">About CASTLES.CC</font><br><br><font style="font-weight:normal;font-family:Arial;color:#010101;font-size:20px;">Castles.cc is a massively multiplayer game with players from around the world.<br>It’s a creative sandbox game with many different game elements and features, some of which are listed below...</font><br></div></center><div align=center width=100%><center><br><div id="partner" style="width=70%; z-index: 101; text-align:center;><font style="font-weight:normal;font-family:Arial;color:#010101;font-size:20px;"><a href="https://crazygames.com" target="_blank">Castles.cc on Crazy Games</a> and <a href="https://crazygames.com" target="_blank">Silver Games</a></font><br></div></center><div id="feature0" style="transform:translate(0px,10px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="mining.png">Mining & Building</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Mine for resources and build your creations. If you're lucky, you might even find some rare materials!</font></div>
+<div id="feature1" style="transform:translate(0px,10px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="farming.png">Farming</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Start your own farm! Grow crops, raise animals, and learn new perks to become the ultimate farmer.</font></div>
+<div id="feature2" style="transform:translate(0px,200px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="trading.png">Safe Trading</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Never fall a victim to an unfair trade ever again! Use cash registers and vending machines to trade safely.</font></div>
+<div id="feature3" style="transform:translate(0px,200px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="clans.png">Clans</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Get your friends together and create a clan, or join an existing one! It is always merrier with other players.</font></div>
+<div id="feature4" style="transform:translate(0px,390px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="cars.png">Cars</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Yes, you've read it right, cars! Create or participate in competitive races, or just drive around for fun.</font></div>
+<div id="feature5" style="transform:translate(0px,390px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="levels.png">Player Levels</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Gain experience for your adventures and unlock helpful perks, they will definitely come in handy!</font></div>
+<div id="feature6" style="transform:translate(0px,580px);padding:15px;border-radius:20px;position:absolute;background-color:#ffe1a0;width:500px"><font style="font-weight:bold;font-family:Arial;color:#E47C00;font-size:25px;"><img style="float:left;" src="adventure.png">Quests & Adventure</font><br><br><font style="font-weight:normal;font-family:Arial;color:black;font-size:15px;">Play our Adventure and learn about the game, and complete quests to expand your knowledge even more!</font></div>
+</div><div id="ts" style="color:white;border-radius:10px;position:absolute;left:300px;top:100px;width:600px;padding:5px; background-color:#333333;"><font style="font-weight:bold;font-family:Arial;color:#FFFFFF;font-size:16px;"><img src="trouble.png">Troubleshooting<hr>(1) Slow Graphics? Make sure hardware acceleration is enabled<br>(2) Do not play in incognito window (CC can not save)<br>(3)Want to see all the crafting recipes? <a href="http://cubiccastles.com/recipes.html">Click Here.</a></font></div><center><br><div style="transform:translate(0px,730px); width=80%><br><font style="font-weight:normal;font-family:Arial;color:#010101;font-size:20px;"><br><br>Copyright 2020 Cosmic Cow Games LLC.</font><br></div></center>        </div>
+        <script>
+            function repositionLowerFold() {
+                element = document.getElementById("GameExtras");
+                element.style.backgroundColor="#fff4dc";
+                element.style.width="100%";
+
+                let clientWidth = element.clientWidth;
+                let center=clientWidth/2;
+                let cols=2;
+                let x1=0;
+                let x2=0;
+                let x3=0;
+                let curry=10;
+                let yheight=190;
+                x1 = center-530; x2=center+10; x3=center-265; 
+                element.style.minHeight=curry+yheight+250;
+                //element.style.left = "50%";
+
+                element = document.getElementById("feature0");
+                element.style.transform = "translate("+x1+"px, "+curry+"px";
+                element = document.getElementById("feature1");
+                element.style.transform = "translate("+x2+"px, "+curry+"px";
+
+                curry += yheight;
+                element = document.getElementById("feature2");
+                element.style.transform = "translate("+x1+"px, "+curry+"px";
+                element = document.getElementById("feature3");
+                element.style.transform = "translate("+x2+"px, "+curry+"px";
+
+                curry += yheight;
+                element = document.getElementById("feature4");
+                element.style.transform = "translate("+x1+"px, "+curry+"px";
+                element = document.getElementById("feature5");
+                element.style.transform = "translate("+x2+"px, "+curry+"px";
+
+                curry += yheight;
+                element = document.getElementById("feature6");
+                element.style.transform = "translate("+x3+"px, "+curry+"px)";
+
+                curry += yheight+300;
+                element = document.getElementById("ts");
+                element.style.top = ""+curry+"px";
+                element.style.left = ""+(center-300)+"px";
+
+                //curry += 50;
+                element = document.getElementById("partner");
+                element.style.transform = "translate("+0+"px, "+curry+"px)";
+
+                //element.style.top = ""+curry+"px";
+                //element.style.left = ""+(center)+"px";
+
+            }
+            repositionLowerFold();
+            window.addEventListener("resize",repositionLowerFold);
+        </script>
+
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const realm = urlParams.get('realm')      
+      if(realm)
+      {
+        Module['arguments'] = [];
+        Module['arguments'].push(realm);
+      }
+      else
+      {
+        const roomId = urlParams.get('roomId')      
+        if(roomId)
+        {
+          Module['arguments'] = [];
+          Module['arguments'].push(roomId);
+        }
+      }
+    </script>
+    <script async type="text/javascript" src="index.js?nocache=169"></script>
+    <!--<script>setInterval(() => window.focus(), 500);</script>-->
+    <script>window.focus();</script>
+    <script>gtag('event', 'page_start', { 'event_category' : 'app' })</script>
+    <div id="castles-cc_multisize"  style="width:768px; height:90px; visibility: hidden; position: absolute; z-index: 100;">
+      <script type='text/javascript'>
+        if(typeof gCrazySDK == 'undefined') {
+          aiptag.cmd.display.push(function() { aipDisplayTag.display('castles-cc_multisize'); });
+        }
+      </script>	
+    </div>	
+    <div id='castles-cc_300x250' style="width:300px; height:250px; visibility: hidden; position: absolute; z-index: 100;"> 
+  		<script type='text/javascript'>
+        if(typeof gCrazySDK == 'undefined') {
+          aiptag.cmd.display.push(function() { aipDisplayTag.display('castles-cc_300x250'); });
+        }
+		  </script>
+	  </div>
+	  <div id='castles-cc_300x250_2' style="width:300px; height:250px; visibility: hidden; position: absolute; z-index: 100;">
+		  <script type='text/javascript'>
+        if(typeof gCrazySDK == 'undefined') {
+          aiptag.cmd.display.push(function() { aipDisplayTag.display('castles-cc_300x250_2'); });
+        }
+		  </script>
+	  </div>
+
+
+    <div id="preroll" style="width: 960px; height: 540px; visibility: hidden; position: absolute; top: 50%; left: 50%; z-index: 100; transform: translate(-50%, -50%);">
+    </div>
+		</div>    
+
+  </body>
+</html>
+
+
